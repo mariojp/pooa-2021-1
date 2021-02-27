@@ -1,6 +1,9 @@
 package br.com.mariojp.colecoes.usuarios;
 
+import java.util.List;
+
 import br.com.mariojp.colecoes.usuarios.model.Usuario;
+import br.com.mariojp.colecoes.usuarios.persistencia.UsuarioDAO;
 
 /**
  * 
@@ -33,13 +36,29 @@ public class Principal {
 	
 	public static void main(String[] args) {
 		
-		Usuario usuario1 = new Usuario("pedro@email.com","Pedro", "1234","ADMINISTRADOR");
+		UsuarioDAO dao = new UsuarioDAO();
 		
-		usuario1.salvar();
+
 		
-		Usuario usuario2 = new Usuario("maria@email.com","Maria","1234");
+		Usuario usuario = new Usuario("Pedro","pedro@email.com", "1234","ADMINISTRADOR");
+		dao.salvar(usuario);
 		
-		usuario2.salvar();
+
+		usuario = new Usuario("Maria","maria@email.com","1234");
+
+		dao.salvar(usuario);
+		
+		List<Usuario> usuarios2 = dao.lista();
+		Usuario x = new Usuario("joao", "joa","123");
+		//dao.salvar(x);
+		usuarios2.add(x);
+		
+		System.out.println("LISTAR");
+		for (Usuario u : dao.lista()) {
+			System.out.println(u);
+		}
+		
+		
 	}
 
 }
