@@ -9,24 +9,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import br.com.mariojp.colecoes.usuarios.controller.UsuarioController;
 import br.com.mariojp.colecoes.usuarios.model.Usuario;
+import br.com.mariojp.colecoes.usuarios.view.UsuarioConsole;
 
 /**
+ * DAO
  * DATA ACCESS OBJECT
  * @author mariojp
  *
  */
-public class UsuarioDAO {
+public class UsuarioMapDAO implements BancoDAO{
 
-	
-	// Usuario[] usuarios = new Usuario[100];
 	private Map<String,Usuario> usuarios = new HashMap<String,Usuario>();
-	//private List<Usuario> usuarios = new ArrayList<Usuario>();
-	
+
+	public UsuarioMapDAO() {
+		String senha = UsuarioConsole.criptografarSenha("1234");
+		Usuario usuario = new Usuario("Pedro","pedro@email.com", senha,"ADMINISTRADOR");
+		salvar(usuario);
+		Usuario usuario2 = new Usuario("Maria","maria@email.com", senha);
+		salvar(usuario2);
+	}
 	
 	public void salvar(Usuario usuario) {
 		if(usuario.getEmail().contains("@")) {
-			//usuarios.add(usuario);
 			usuarios.put(usuario.getEmail(),usuario);
 		}
 		
@@ -34,9 +40,6 @@ public class UsuarioDAO {
 
 	public List<Usuario> lista() {
 		return Collections.unmodifiableList(new ArrayList<>(usuarios.values()));
-//		List<Usuario> list2 = usuarios.stream().collect(Collectors.toList());
-//		return list2;
-		//return usuarios;
 	}
 	
 	

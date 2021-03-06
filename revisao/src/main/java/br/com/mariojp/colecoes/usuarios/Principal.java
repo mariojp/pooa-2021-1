@@ -2,8 +2,13 @@ package br.com.mariojp.colecoes.usuarios;
 
 import java.util.List;
 
+import br.com.mariojp.colecoes.usuarios.controller.UsuarioController;
 import br.com.mariojp.colecoes.usuarios.model.Usuario;
-import br.com.mariojp.colecoes.usuarios.persistencia.UsuarioDAO;
+import br.com.mariojp.colecoes.usuarios.persistencia.BancoDAO;
+import br.com.mariojp.colecoes.usuarios.persistencia.UsuarioListDAO;
+import br.com.mariojp.colecoes.usuarios.persistencia.UsuarioMapDAO;
+import br.com.mariojp.colecoes.usuarios.view.UsuarioConsole;
+import br.com.mariojp.colecoes.usuarios.view.UsuarioDesktop;
 
 /**
  * 
@@ -36,28 +41,43 @@ public class Principal {
 	
 	public static void main(String[] args) {
 		
-		UsuarioDAO dao = new UsuarioDAO();
-		
-
-		
-		Usuario usuario = new Usuario("Pedro","pedro@email.com", "1234","ADMINISTRADOR");
-		dao.salvar(usuario);
-		
-
-		usuario = new Usuario("Maria","maria@email.com","1234");
-
-		dao.salvar(usuario);
-		
-		List<Usuario> usuarios2 = dao.lista();
-		Usuario x = new Usuario("joao", "joa","123");
-		//dao.salvar(x);
-		usuarios2.add(x);
-		
-		System.out.println("LISTAR");
-		for (Usuario u : dao.lista()) {
-			System.out.println(u);
+		//Inversao de Controle IoC
+		BancoDAO dao;
+		if(args.length> 0 && args[0].equals("map")){
+			dao = new UsuarioMapDAO();
+		}else {
+			dao = new UsuarioListDAO();
 		}
+
+
+		UsuarioController controller =  new UsuarioController(dao);
 		
+		//UsuarioDesktop desktop = new UsuarioDesktop(controller);
+		
+		UsuarioConsole console = new UsuarioConsole(controller);
+		
+		//
+		
+
+		
+//		Usuario usuario = new Usuario("Pedro","pedro@email.com", "1234","ADMINISTRADOR");
+//		dao.salvar(usuario);
+//		
+//
+//		usuario = new Usuario("Maria","maria@email.com","1234");
+//
+//		dao.salvar(usuario);
+//		
+//		List<Usuario> usuarios2 = dao.lista();
+//		Usuario x = new Usuario("joao", "joa","123");
+//		//dao.salvar(x);
+//		usuarios2.add(x);
+//		
+//		System.out.println("LISTAR");
+//		for (Usuario u : dao.lista()) {
+//			System.out.println(u);
+//		}
+//		
 		
 	}
 

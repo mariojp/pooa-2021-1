@@ -1,5 +1,13 @@
 package br.com.mariojp.colecoes.usuarios.model;
 
+/**
+ * MVC - M
+ * MODEL
+ * - ANEMICO (X)
+ * - RICO ( )
+ * @author mariojp
+ *
+ */
 public class Usuario {
 	
 
