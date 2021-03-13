@@ -7,6 +7,7 @@ import br.com.mariojp.colecoes.usuarios.model.Usuario;
 import br.com.mariojp.colecoes.usuarios.persistencia.BancoDAO;
 import br.com.mariojp.colecoes.usuarios.persistencia.UsuarioListDAO;
 import br.com.mariojp.colecoes.usuarios.persistencia.UsuarioMapDAO;
+import br.com.mariojp.colecoes.usuarios.persistencia.UsuarioSetDAO;
 import br.com.mariojp.colecoes.usuarios.view.UsuarioConsole;
 import br.com.mariojp.colecoes.usuarios.view.UsuarioDesktop;
 
@@ -45,8 +46,10 @@ public class Principal {
 		BancoDAO dao;
 		if(args.length> 0 && args[0].equals("map")){
 			dao = new UsuarioMapDAO();
-		}else {
+		}else if(args.length> 0 && args[0].equals("list")) {
 			dao = new UsuarioListDAO();
+		}else {
+			dao = new UsuarioSetDAO();
 		}
 
 

@@ -8,7 +8,7 @@ package br.com.mariojp.colecoes.usuarios.model;
  * @author mariojp
  *
  */
-public class Usuario {
+public class Usuario implements Comparable<Usuario>{
 	
 
 	
@@ -93,6 +93,11 @@ public class Usuario {
 		builder.append(perfil);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(Usuario o) {
+		return this.getEmail().compareTo(o.getEmail());
 	}
 	
 
